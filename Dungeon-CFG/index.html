@@ -1,0 +1,259 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://itch.io/static/game.css?1490635879"/><link rel="stylesheet" href="https://itch.io/static/icons/style.css?1490635879"/>
+
+<style type="text/css">
+#wrapper {
+  background-color: #c35f1f;
+  
+}
+#inner_column {
+  color: #c35f1f;
+  background-color: #303030;
+}
+#inner_column a {
+  color: #c35f1f;
+}
+#inner_column .button {
+  background-color: #c35f1f;
+  color: white;
+  text-shadow: 0 1px 0px #d77333;
+}
+#inner_column hr {
+  background-color: #565656;
+}
+.view_game_page .reward_row,
+.view_game_page .bundle_row
+{
+  border-color: #444444 !important;
+}
+.game_comments_widget .community_post .post_footer a,
+.game_comments_widget .community_post .post_footer .vote_btn span,
+.game_comments_widget .community_post .post_header .post_date a,
+.game_comments_widget .community_post .post_header .edit_message,
+.game_comments_widget .community_post .post_header .vote_counts,
+.game_comments_widget .hint
+{
+  color: #c35f1f !important;
+  opacity: 0.5;
+}
+.game_comments_widget .community_post.deleted {
+  background: #444444;
+  color: #c35f1f;
+}
+.game_comments_widget .community_post.deleted em {
+  opacity: 0.5;
+}
+.game_comments_widget .community_post .post_votes,
+.game_comments_widget .community_post .post_footer .vote_btn
+{
+  border-color: #444444;
+}
+.game_comments_widget .community_post .post_footer .vote_btn:hover,
+.game_comments_widget .community_post .post_footer .vote_btn.voted
+{
+  background-color: #c35f1f;
+  border-color: #c35f1f;
+  text-shadow: 0 1px 0px #d77333;
+}
+.game_comments_widget .community_post .post_footer .vote_btn:hover span,
+.game_comments_widget .community_post .post_footer .vote_btn.voted span
+{
+  color: white !important;
+  opacity: 0.8;
+}
+.game_comments_widget .form .redactor-box {
+  border-color: rgba(195, 95, 31, 0.5);
+  background: transparent;
+}
+.game_comments_widget .form .redactor-editor {
+  background: #444444;
+}
+.game_comments_widget .form .redactor-toolbar {
+  background: #444444;
+}
+.redactor-box .redactor-toolbar li a:hover,
+.redactor-box .redactor-toolbar li a:active,
+.redactor-box .redactor-toolbar li a.redactor-act
+{
+  background-color: #c35f1f;
+  color: white !important;
+  text-shadow: 0 1px 0px #d77333;
+}
+.game_community_preview_widget .community_topic_row .topic_tag {
+  background-color: #444444;
+}
+.footer .svgicon,
+.view_game_page .more_information_toggle .svgicon
+{
+  fill: #c35f1f !important;
+}
+.view_game_page .game_info_panel_widget {
+  background: #444444;
+}
+.view_game_page .star_picker {
+  color: #c35f1f;
+}
+p {
+  padding: 15px;
+}
+</style>
+<style type="text/css">.inner_column{ font-family: Helvetica, 'Helvetica Neue', Helvetica, Arial, sans-serif;}</style>
+<style type="text/css">
+.content {
+ /*position: absolute;*/
+ margin-top: -95px;
+ margin-left: -155px;
+ width: 150%;
+}
+.contain {
+  width: 650px;
+  height: 500px;
+  overflow: hidden;
+}
+</style>
+</head>
+<body style="font-family: Helvetica, 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+
+<div id="wrapper" class="main wrapper"><div class="inner_column size_large family_pixel" id="inner_column"><div class="header" id="header"><h1 itemprop="name" class="game_title">Dungeon CFG</h1></div>
+<p>
+<a name="top"></a>I made a roguelike dungeon generator based on a probabilistic CFG <a href = "#1">[1]</a>. I used it in my 2017 7DRL: <a href="http://forums.roguetemple.com/index.php?topic=5331.msg49177#msg49177">Rogue, Fighter, Mage</a>.
+</p>
+
+
+<div>
+<center>
+<a href="http://i.imgur.com/whElWaP.png">
+<img src="http://i.imgur.com/whElWaP.png" style="width:800px; position:absolute; left:50%; margin-left: -400px;"></a>
+</center>
+</div>
+<div id="fill" style="height:525px"></div>
+
+
+<p>
+Here are the rules of the CFG:
+<pre>
+  rules = [
+    [ 'M', 4,
+      ( ( 'm' ) ) ],
+
+    [ 'M', 2, (
+           ( 'r' ),
+      ( 'r', 'm', 'r' ),
+           ( 'r' ) ) ],
+
+    [ 'm', 1, ( ( 'Q' ) ) ],
+
+    [ 'm', 3, (
+      ( 'Q', 'rr', 'Q' ),
+      ( 'r', 'rr', 'r' ),
+      ( 'Q', 'rr', 'Q' ) ) ],
+
+    [ 'm', 3, (
+      ( 'Q', 'r', 'Q' ),
+      ( 'r', 'r', 'r' ),
+      ( 'Q', 'r', 'Q' ) ) ],
+
+    [ 'm', 2, (
+           ( 'rr' ),
+      ( 'Q', 'rr', 'Q' ),
+           ( 'rr' ) ) ],
+
+    [ 'm', 2, (
+           ( 'r' ),
+      ( 'Q', 'r', 'Q' ),
+           ( 'r' ) ) ],
+
+    [ 'm', 2, (
+           ( 'Q' ),
+      ( 'r', 'r', 'r' ),
+           ( 'Q' ) ) ],
+
+    [ 'm', 2, (
+      ( 'a', 'r', 'a' ),
+      ( 'r', 'z', 'r' ),
+      ( 'a', 'r', 'a' ) ) ],
+
+    [ 'z', 1, (
+      ( 't' ) ) ],
+
+    [ 'z', 2, (
+           ( 'r' ),
+      ( 'r', 't', 'r' ),
+           ( 'r' ) ) ],
+
+    [ 'Q', 1, ( 'Q', 'Q' ) ],
+
+    [ 'Q', 1, ( ( 'z' ) ) ],
+
+    [ 'Q', 1, (
+      ( 'Q', 'Q' ),
+      ( 'Q', 'Q' ) ) ]
+
+   ]
+</pre> </p> <p> <ul>
+<li><tt>M =</tt> start node</li>
+<li><tt>m =</tt> surrounded by corridors</li>
+<li><tt>r =</tt> road</li>
+<li><tt>Q =</tt> room</li>
+<li><tt>z =</tt> boss room</li>
+<li><tt>t =</tt> throne room</li>
+</ul> </p> <p>
+An entry of the rules is given by the tripple <tt>(a, p, b)</tt> where <tt>a</tt> is a node to be expanded, <tt>p</rr> is the unnormalized probability of expanding that node, and <tt>b</tt> is the set of nodes its' expanded to, represented as a 2d centred grid (so for example, according to the second to last rule, a room has an unnormalized probability of 2 of being changed into a boss room).
+</p>
+<p><a name="top2"></a>The rules are loosely based on the board game <i>HeroQuest</i> <a href="#2">[2]</a>. The <i>HeroQuest</i> board even has positive probability under this probabilistic CFG.
+</p>
+<p>
+In postprocessing steps, a ton of doors and secret rooms are added. Also, some of the rooms are shifted around a bit. Then, the start room (with green dots) and end room (with red dots) are chosen. Finally, doors are selectively removed and impassible blocks are added one at a time (preserving a path between the start room and end room), until a nice path between the start room and end room is found. Nice is defined as: a reasonably long path and at least one reasonably big loop.
+</p>
+<p>
+Here are the end results:
+<center>
+<div class = "contain"><img class="content" src="dungeon005000.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005001.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005002.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005003.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005004.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005005.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005006.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005007.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005008.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005009.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005010.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005011.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005012.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005013.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005014.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005015.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005016.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005017.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005018.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005019.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005020.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005021.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005022.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005023.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005024.png"></div><br>
+<div class = "contain"><img class="content" src="dungeon005025.png"></div>
+</center> </p> <p> <ul>
+<li>Green dots <tt>=</tt> start room</li>
+<li>Red dots <tt>=</tt> end room</li>
+<li>White or black dots <tt>=</tt> doors</li>
+<li>Gray tiles <tt>=</tt> corridors</li>
+<li>Coloured tiles <tt>=</tt> rooms</li>
+<li>Red dot <tt>=</tt> possible trap</li>
+<li>Purple dot <tt>=</tt> possible secret</li>
+</ul>
+</p>
+<p>
+Rooms that are not on the main path that goes between the start and the end are all coloured a bit red. Rooms that are disconnected from the start room by the end room (i.e., you can't get to them without going to the end room) are coloured a bit blue. (Doors to either of these rooms can be safely trapped or locked. Blue rooms are special: you'll only get to them if you go past the end room, and so they're a perfect place for danger and treasure.)
+</p>
+<p>
+<a href="#top">[1]</a> <a name="1"></a><a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.119.1445">Adams, D. <i>Automatic generation of dungeons for computer games.</i> 2002. University of Sheffield, UK.</a>
+</p>
+<p>
+<a href="#top2">[2]</a> <a name="2"></a><a href="https://boardgamegeek.com/boardgame/699/heroquest">Baker, S. <i>HeroQuest</i>. 1989. Hasboro.</a> 
+</p>
+</div>
+</body>
+</html>
